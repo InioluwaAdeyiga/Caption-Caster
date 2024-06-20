@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caption Caster</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Helvetica;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url("images/backimage.png");
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed; 
+        }
+        .chat-container {
+            width: 60%;
+            margin-bottom: 0%;
+            padding: 20px;
+          
+        }
+        .chat-container-1 {
+            width: 60%;
+            margin-bottom: 0%;
+            margin-top: 3%;
+            padding: 20px;
+           
+        }
+        .message {
+            padding: 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+        .user-message {
+            background: #007bff;
+            color: #fff;
+            text-align: right;
+        }
+        .bot-message {
+            background: #e0e0e0;
+            text-align: left
+        }
+        .logo{
+            color:white;
+            text-align: left;
+            position: fixed;
+            right: 81%;
+            bottom: 88%;
+        }
+        .instruction-text{
+            margin-bottom: 0%;
+            color: white;
+            font-weight: bolder;
+            text-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
+        }
+        .instruction-text-2{
+            margin-bottom: 0%;
+            color: white;
+            width: 95%;
+            font-weight: bolder;
+            text-align: right;
+            text-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
+        }
+        .example{
+            display: flex;
+            flex-direction: column;
+        }
+        .example-2{
+            margin-top: 3%;
+        }
+        .example-3{
+            margin-top: 3%;
+        }
+        .example-box{
+            width: 95%;
+            height: 35px;
+            box-shadow: 0px 0px 10px 0px rgb(0, 199, 199);
+            border-radius: 10px;
+            background-color:white;
+            display: flex;
+            flex-direction: row;
+        }
+        .example-box-2{
+            width: 95%;
+            height: 60px;
+            box-shadow: 0px 0px 10px 0px rgb(0, 199, 199);
+            border-radius: 10px;
+            background-color: #ffffff;
+            margin-top: 0.8%;
+            display: flex;
+            flex-direction: row;
+        }
+        .example-box-3{
+            width: 95%;
+            height: 85px;
+            box-shadow: 0px 0px 10px 0px rgb(0, 156, 156);
+            border-radius: 10px;
+            background-color: #ffffff;
+            margin-top: 0.8%;
+            margin-bottom: 2%;
+            display: flex;
+            flex-direction: row;
+        }
+        .example-text{
+            margin-left: 1%;
+            margin-top: 0.5%;
+            font-weight: 520;
+        }
+        .example-text-right{
+            margin-left: 1%;
+            margin-top: 0.5%;
+            font-weight: 520;
+            width: 650px;
+        }
+        .example-text-right-centered{
+            margin-left: 1%;
+            margin-top: 0.5%;
+            font-weight: 520;
+            margin-left: 5%;
+            text-align: right;
+            width: 650px;
+        }
+        span{
+            color: #00BA00;
+            font-weight: 550;
+        }
+        .wrong{
+            width:25px;
+            height: 25px;
+            margin-top: 0.6%;
+            margin-left: 33%;
+        }
+        .right{
+            width:25px;
+            height: 25px;
+            margin-top: 2%;
+            margin-left: 6%;
+            
+        }
+        .right-1{
+            width:25px;
+            height: 25px;
+            margin-top: 2%;
+            margin-left: 1.5%;
+            
+        }
+        .right-2{
+            width:25px;
+            height: 25px;
+            margin-top: 4%;
+            margin-left: 6%;
+            
+        }
+        .link_class{
+            display: flex;
+            flex-direction:row;
+        }
+        .tips_link{
+            color:white;
+            font-family:  Helvetica;
+        }
+    </style>
+</head>
+<body>
+    
+    <h2 class="logo">CaptionCaster</h2>
+    <div class="chat-container-1">
+        <div class="example">
+        <div class="instruction-text">
+        <h5><b>Provide as Much Information as Possible</b></h5>
+        </div>
+        <form id="message-form">
+            <div class="example-box">
+                <p class="example-text">Generate a social media caption for the launch of our new product</p>
+                <img src="images/remove.png" class="wrong">
+            </div>
+            <div class="example-box-2">
+                <p class="example-text-right">Generate a social media caption for the launch of our new <span>eco-friendly water bottle</span>, called <span>Stanley</span>. Highlight its <span>sustainability</span>, <span>sleek design</span>, and <span>durability</span></p>
+                <img src="images/check.png" class="right">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="chat-container">
+    
+        <h5 class="instruction-text-2">Specify the Tone you Want the Caption In</h5>
+        <form id="message-form">
+            <div class="example-box-2">
+                <img src="images/check.png" class="right-1">
+                <p class="example-text-right-centered">Generate a <span>catchy</span> and <span>engaging</span> social media caption for the launch of our new eco-friendly water bottle, called Stanley. Highlight its sustainability, sleek design, and durability</p>
+
+            </div>
+        </form>
+    
+</div>
+<div class="chat-container">
+        <h5 class="instruction-text">Specify the Length of the Caption</h5>
+        <form id="message-form">
+            <div class="example-box-3">
+                <p class="example-text-right">Generate a <span>short</span> and <span>concise</span> but catchy and engaging social media caption for the launch of our new eco-friendly water bottle, called Stanley. Highlight its sustainability, sleek design, and durability</p>
+                <img src="images/check.png" class="right-2">
+            </div>
+        </form>
+
+</div>
+<div class="link_class">
+    <a href="index.html" class="tips_link"><b>Try Out a Caption Now !</b></a>
+    </div>
+    <script>
+        function sendMessage() {
+            var message = document.getElementById('message').value;
+            if (message.trim() === '') return;
+
+            var conversation = document.getElementById('conversation');
+
+            // Add user message to conversation
+            conversation.innerHTML += '<div class="message user-message">' + message + '</div>';
+
+            // Send message to server for prediction
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'message=' + encodeURIComponent(message),
+            })
+            .then(response => response.json())
+            .then(data => {
+                var botMessage = data.result;
+                // Add bot message to conversation
+                conversation.innerHTML += '<div class="message bot-message">' + botMessage + '</div>';
+            });
+
+            // Clear input field
+            document.getElementById('message').value = '';
+
+            // Scroll to bottom of conversation
+            conversation.scrollTop = conversation.scrollHeight;
+        }
+
+        // Submit form when "Send" button is clicked
+        document.getElementById('message-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            sendMessage();
+        });
+    </script>
+</body>
+</html>

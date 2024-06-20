@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caption Caster</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Helvetica;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url("images/backimage.png");
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed; 
+        }
+        .chat-container {
+            width: 60%;
+            margin-bottom: 1.5%;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0px 0px 10px 0px #2e2d2d;
+        }
+        .message {
+            padding: 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+        .user-message {
+            background: #007bff;
+            color: #fff;
+            text-align: right;
+        }
+        .bot-message {
+            background: #e0e0e0;
+            text-align: left
+        }
+        .link_class{
+            display: flex;
+            flex-direction:row;
+        }
+        .tips_link{
+            color:white;
+            font-family:  Helvetica;
+        }
+        .logo{
+            color:white;
+            text-align: left;
+            position: fixed;
+            right: 81%;
+            bottom: 88%;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="logo">CaptionCaster</h2>
+    <div class="chat-container">
+        <h2 class="text-center">Generate Your Captions Here!</h2>
+        <div id="conversation" class="mb-3"></div>
+        <form id="message-form">
+            <div class="input-group">
+                <input type="text" id="message" class="form-control" placeholder="Type your message...">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="link_class">
+    <img src="images/light-bulb.png" width="25px" height="25px">
+    <a href="tips.html" class="tips_link"><b>  Learn How To Get The Best Responses Out Of Caption Caster !</b></a>
+    </div>
+    <script>
+        function sendMessage() {
+            var message = document.getElementById('message').value;
+            if (message.trim() === '') return;
+
+            var conversation = document.getElementById('conversation');
+
+            // Add user message to conversation
+            conversation.innerHTML += '<div class="message user-message">' + message + '</div>';
+
+            // Send message to server for prediction
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'message=' + encodeURIComponent(message),
+            })
+            .then(response => response.json())
+            .then(data => {
+                var botMessage = data.result;
+                // Add bot message to conversation
+                conversation.innerHTML += '<div class="message bot-message">' + botMessage + '</div>';
+            });
+
+            // Clear input field
+            document.getElementById('message').value = '';
+
+            // Scroll to bottom of conversation
+            conversation.scrollTop = conversation.scrollHeight;
+        }
+
+        // Submit form when "Send" button is clicked
+        document.getElementById('message-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            sendMessage();
+        });
+    </script>
+</body>
+</html>
