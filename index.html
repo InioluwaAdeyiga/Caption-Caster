@@ -43,8 +43,10 @@
         }
         .bot-message {
             background: #ffffff;
-            border: solid 3px#c5c5c5;
+            border: solid 2px#c5c5c5;
             text-align: left;
+            width: 90%;
+            margin-left: 2%;
             display: flex;
             flex-direction: row;
         }
@@ -68,9 +70,9 @@
             width: 30px;
             margin-top: 5%;
         }
-        .bot-text{
-            width: 100%;
-            margin-left: 1%;
+        .message-holder{
+            display: flex;
+            flex-direction: row;
         }
     </style>
 </head>
@@ -108,7 +110,7 @@
             // Simulate server response with predefined message
             setTimeout(function() {
                 // Add predefined message to conversation
-                conversation.innerHTML += '<div class="message bot-message">' + '<img src="images/Asset 2CCLOGO.png" class="bot-image">'+'<div class="bot-text">'+ predefinedMessage +'</div>'+'</div>';
+                conversation.innerHTML += '<div class="message-holder">'+'<img src="images/Asset 2CCLOGO.png" class="bot-image">'+'<div class="message bot-message">' + predefinedMessage +'</div>' + '</div>';
     
                 // Scroll to bottom of conversation
                 conversation.scrollTop = conversation.scrollHeight;
