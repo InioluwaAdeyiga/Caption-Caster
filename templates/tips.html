@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caption Caster</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/Asset 3CCLOGO2.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+      body {
+    font-family: Helvetica;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url("../static/images/backimage.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.chat-container, .chat-container-1 {
+    width: 60%;
+    padding: 20px;
+    margin-bottom: 0%;
+    box-sizing: border-box;
+}
+
+.chat-container-1 {
+    margin-top: 3%;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background: #007bff;
+    color: #fff;
+    text-align: right;
+}
+
+.bot-message {
+    background: #e0e0e0;
+    text-align: left;
+}
+
+.logo {
+    color: white;
+    text-align: left;
+    position: fixed;
+    right: 81%;
+    bottom: 88%;
+    font-size: 1.5em; /* Adjust size as needed */
+}
+
+.instruction-text, .instruction-text-2 {
+    margin-bottom: 0%;
+    color: white;
+    font-weight: bolder;
+    text-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
+    word-wrap: break-word;
+}
+
+.instruction-text-2 {
+    width: 95%;
+    text-align: right;
+}
+
+.example {
+    display: flex;
+    flex-direction: column;
+}
+
+.example-2, .example-3 {
+    margin-top: 3%;
+}
+
+.example-box, .example-box-2, .example-box-3 {
+    width: 95%;
+    box-shadow: 0px 0px 10px 0px rgb(0, 199, 199);
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.8%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+.example-box {
+    height: 35px;
+}
+
+.example-box-2 {
+    height: 60px;
+}
+
+.example-box-3 {
+    height: 85px;
+    margin-bottom: 2%;
+    box-shadow: 0px 0px 10px 0px rgb(0, 156, 156);
+}
+
+.example-text, .example-text-right, .example-text-right-centered {
+    margin-left: 1%;
+    margin-top: 0.5%;
+    font-weight: 520;
+    word-wrap: break-word;
+}
+
+.example-text-right {
+    width: calc(100% - 30px); /* Adjust width to fit within container */
+}
+
+.example-text-right-centered {
+    width: calc(100% - 30px); /* Adjust width to fit within container */
+    margin-left: 5%;
+    text-align: right;
+}
+
+span {
+    color: #00BA00;
+    font-weight: 550;
+}
+
+.wrong, .right, .right-1, .right-2 {
+    width: 25px;
+    height: 25px;
+}
+
+.wrong {
+    margin-top: 0.6%;
+    margin-left: 33%;
+}
+
+.right {
+    margin-top: 2%;
+    margin-left: 6%;
+}
+
+.right-1 {
+    margin-top: 2%;
+    margin-left: 1.5%;
+}
+
+.right-2 {
+    margin-top: 4%;
+    margin-left: 6%;
+}
+
+.link_class {
+    display: flex;
+    flex-direction: row;
+}
+
+.tips_link {
+    color: white;
+    font-family: Helvetica;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .chat-container, .chat-container-1 {
+        width: 80%;
+    }
+    
+    .example-text-right, .example-text-right-centered {
+        width: calc(100% - 30px); /* Adjust width to fit within container */
+    }
+}
+
+@media (max-width: 992px) {
+    .chat-container, .chat-container-1 {
+        width: 90%;
+    }
+    
+    .example-text-right, .example-text-right-centered {
+        width: calc(100% - 30px); /* Adjust width to fit within container */
+    }
+}
+
+@media (max-width: 768px) {
+    .chat-container, .chat-container-1 {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .example-box, .example-box-2, .example-box-3 {
+        width: 100%;
+    }
+    
+    .example-text-right, .example-text-right-centered {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo {
+        right: 5%;
+        bottom: 95%;
+        font-size: 1.5em; /* Keep logo size consistent */
+    }
+    
+    .instruction-text-2 {
+        font-size: 0.8em;
+    }
+    
+    .example-text-right-centered {
+        text-align: center;
+        margin-left: 0;
+    }
+}
+
+    </style>
+</head>
+<body>
+    
+    <h2 class="logo">CaptionCaster</h2>
+    <div class="chat-container-1">
+        <div class="example">
+        <div class="instruction-text">
+        <h5><b>Provide as Much Information as Possible</b></h5>
+        </div>
+        <form id="message-form">
+            <div class="example-box">
+                <p class="example-text">Generate a social media caption for the launch of our new product</p>
+                <img src="../static/images/remove.png" class="wrong">
+            </div>
+            <div class="example-box-2">
+                <p class="example-text-right">Generate a social media caption for the launch of our new <span>eco-friendly water bottle</span>, called <span>Stanley</span>. Highlight its <span>sustainability</span>, <span>sleek design</span>, and <span>durability</span></p>
+                <img src="../static/images/check.png" class="right">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="chat-container">
+    
+        <h5 class="instruction-text-2">Specify the Tone you Want the Caption In</h5>
+        <form id="message-form">
+            <div class="example-box-2">
+                <img src="../static/images/check.png" class="right-1">
+                <p class="example-text-right-centered">Generate a <span>catchy</span> and <span>engaging</span> social media caption for the launch of our new eco-friendly water bottle, called Stanley. Highlight its sustainability, sleek design, and durability</p>
+
+            </div>
+        </form>
+    
+</div>
+<div class="chat-container">
+        <h5 class="instruction-text">Specify the Length of the Caption</h5>
+        <form id="message-form">
+            <div class="example-box-3">
+                <p class="example-text-right">Generate a <span>short</span> and <span>concise</span> but catchy and engaging social media caption for the launch of our new eco-friendly water bottle, called Stanley. Highlight its sustainability, sleek design, and durability</p>
+                <img src="../static/images/check.png" class="right-2">
+            </div>
+        </form>
+
+</div>
+<div class="link_class">
+    <a href="index.html" class="tips_link"><b>Try Out a Caption Now !</b></a>
+    </div>
