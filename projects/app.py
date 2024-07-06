@@ -1,4 +1,4 @@
-import os
+
 import re
 from flask import Flask, request, jsonify, render_template
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
@@ -10,13 +10,9 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-def load_model_and_tokenizer():
-    base_path = os.path.dirname(__file__)
-    relative_path = "final_parm"
-    full_path = os.path.join(base_path, relative_path)
-    tokenizer = AutoTokenizer.from_pretrained(full_path)
-    model = AutoModelForSeq2SeqLM.from_pretrained(full_path)
-    return tokenizer, model
+tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-large")
+model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-large")
+
 
 @app.route("/generate_caption", methods=["POST"])
 def generate_caption():
@@ -25,7 +21,7 @@ def generate_caption():
     if not input_text:
         return jsonify({"error": "No input text provided"}), 400
 
-    tokenizer, model = load_model_and_tokenizer()
+
 
     inputs = tokenizer(input_text, return_tensors="pt", padding=True)
     input_ids = inputs.input_ids
@@ -64,4 +60,4 @@ def generate_caption():
     return jsonify({"caption": caption})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
