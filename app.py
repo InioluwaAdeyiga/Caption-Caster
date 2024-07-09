@@ -13,11 +13,11 @@ def index():
 
 @lru_cache(maxsize=1)
 def get_tokenizer():
-    return AutoTokenizer.from_pretrained("google/flan-t5-base")  # Smaller model
+    return AutoTokenizer.from_pretrained("google/flan-t5-small")  # Use the smallest model
 
 @lru_cache(maxsize=1)
 def get_model():
-    return AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-base")  # Smaller model
+    return AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-small")  # Use the smallest model
 
 @app.route("/generate_caption", methods=["POST"])
 def generate_caption():
@@ -28,17 +28,17 @@ def generate_caption():
     tokenizer = get_tokenizer()
     model = get_model()
 
-    inputs = tokenizer(input_text, return_tensors="pt", padding=True)
+    inputs = tokenizer(input_text, return_tensors="pt", padding=True, truncation=True, max_length=128)
     input_ids = inputs.input_ids
     attention_mask = inputs.attention_mask
 
     # Environment variables for configuration
     num_return_sequences = int(os.getenv("NUM_RETURN_SEQUENCES", 1))
-    max_length = int(os.getenv("MAX_LENGTH", 300))
-    min_length = int(os.getenv("MIN_LENGTH", 100))
-    temperature = float(os.getenv("TEMPERATURE", 0.5))
+    max_length = int(os.getenv("MAX_LENGTH", 100))  # Reduce max length to limit memory usage
+    min_length = int(os.getenv("MIN_LENGTH", 20))
+    temperature = float(os.getenv("TEMPERATURE", 0.7))
     top_p = float(os.getenv("TOP_P", 0.9))
-    repetition_penalty = float(os.getenv("REPETITION_PENALTY", 1.5))
+    repetition_penalty = float(os.getenv("REPETITION_PENALTY", 1.2))
     no_repeat_ngram_size = int(os.getenv("NO_REPEAT_NGRAM_SIZE", 2))
 
     with torch.no_grad():
@@ -67,4 +67,6 @@ def generate_caption():
     return jsonify({"caption": caption})
 
 if __name__ == "__main__":
+    # Limit the memory usage for the model (in MB)
+    torch.cuda.set_per_process_memory_fraction(0.5)  # Assume 520MB is around 0.5 of your GPU memory
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
